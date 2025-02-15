@@ -442,6 +442,7 @@ updateSpaceBetween(space) {
         this.container.addEventListener('wheel', (e) => this.handleMouseScroll(e));
         this.container.addEventListener('wheel', (e) => this.handleTouchpadSwipe(e));
 
+        // Touch event listeners for mobile swiping
         this.container.addEventListener('touchstart', (e) => this.handleTouchStart(e));
         this.container.addEventListener('touchmove', (e) => this.handleTouchMove(e));
         this.container.addEventListener('touchend', () => this.handleTouchEnd());
@@ -456,21 +457,24 @@ updateSpaceBetween(space) {
         this.updateNavigationButtons();
     }
 
+    // Handle touch start
     handleTouchStart(e) {
         this.touchStartX = e.touches[0].clientX;
     }
 
+    // Handle touch move
     handleTouchMove(e) {
         this.touchEndX = e.touches[0].clientX;
     }
 
+    // Handle touch end
     handleTouchEnd() {
         const swipeDistance = this.touchStartX - this.touchEndX;
         if (Math.abs(swipeDistance) > this.touchThreshold) {
             if (swipeDistance > 0) {
-                this.moveSlide(1); 
+                this.moveSlide(1); // Swipe left → next slide
             } else {
-                this.moveSlide(-1); 
+                this.moveSlide(-1); // Swipe right → previous slide
             }
         }
     }

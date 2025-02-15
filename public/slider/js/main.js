@@ -7,7 +7,7 @@
 
 */
 
-import Slider from '/slider/js/slider-2.0.1.js';
+import Slider from '/slider/js/slider-2.0.0.js';
 const slider = new Slider('custom-carousel', {
     images: [
         "./slider/images/1.webp",

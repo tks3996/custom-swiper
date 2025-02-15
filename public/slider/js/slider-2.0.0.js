@@ -32,6 +32,12 @@ export default class Slider {
 
         this.spaceBetween = options.spaceBetween || 0;
 
+
+        this.touchStartX = 0;
+        this.touchEndX = 0;
+        this.touchThreshold = 50;
+
+
         this.init();
     }
     init() {
@@ -436,6 +442,11 @@ updateSpaceBetween(space) {
         this.container.addEventListener('wheel', (e) => this.handleMouseScroll(e));
         this.container.addEventListener('wheel', (e) => this.handleTouchpadSwipe(e));
 
+        this.container.addEventListener('touchstart', (e) => this.handleTouchStart(e));
+        this.container.addEventListener('touchmove', (e) => this.handleTouchMove(e));
+        this.container.addEventListener('touchend', () => this.handleTouchEnd());
+
+        
         this.container.addEventListener('contextmenu', (e) => {
             if (!this.cloneSlides && !this.loop && this.index === this.images.length - 1) {
                 e.preventDefault();
@@ -443,5 +454,24 @@ updateSpaceBetween(space) {
         });
     
         this.updateNavigationButtons();
+    }
+
+    handleTouchStart(e) {
+        this.touchStartX = e.touches[0].clientX;
+    }
+
+    handleTouchMove(e) {
+        this.touchEndX = e.touches[0].clientX;
+    }
+
+    handleTouchEnd() {
+        const swipeDistance = this.touchStartX - this.touchEndX;
+        if (Math.abs(swipeDistance) > this.touchThreshold) {
+            if (swipeDistance > 0) {
+                this.moveSlide(1); 
+            } else {
+                this.moveSlide(-1); 
+            }
+        }
     }
 }
