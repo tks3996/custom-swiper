@@ -1,9 +1,13 @@
-// import Slider from '/slider/slider.js';
-// import Slider from '/slider/js/slider-1.0.2.js';
+/*** 
+ 
+ * This slider has been implemented as a component using a constructor.  
+ * For the full code, refer to 👇
+ 
+   path: /slider/js/slider-2.0.0.js.
+
+*/
 
 import Slider from '/slider/js/slider-2.0.0.js';
-
-// import Slider from '/slider/js/test.5.js';
 const slider = new Slider('custom-carousel', {
     images: [
         "./slider/images/1.webp",
@@ -46,3 +50,4 @@ const slider = new Slider('custom-carousel', {
     // centeredView: true,        //center view img will activate - work in progress..
 
 });
+

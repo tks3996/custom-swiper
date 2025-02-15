@@ -15,6 +15,6 @@
 
     <script type="module" src="{{asset('slider/js/main.js')}}"></script>
 
-    
+
 </body>
 </html>
