@@ -9,7 +9,7 @@ export default class Slider {
         this.autoSlide = options.autoSlide ?? false;
         this.autoSlideInterval = options.autoSlideInterval || 3000;
         this.lazyLoad = options.lazyLoad ?? true;
-        this.transitionSpeed = options.transitionSpeed || 300;
+        this.transitionSpeed = options.transitionSpeed || 300; 
         this.accessibility = options.accessibility ?? true;
         this.initialSlide = options.initialSlide || 0;
         this.cloneSlides = options.cloneSlides ?? false;
