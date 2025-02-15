@@ -3,11 +3,11 @@
  * This slider has been implemented as a component using a constructor.  
  * For the full code, refer to 👇
  
-   path: /slider/js/slider-2.0.0.js.
+   path: /slider/js/slider-2.0.1.js.
 
 */
 
-import Slider from '/slider/js/slider-2.0.0.js';
+import Slider from '/slider/js/slider-2.0.1.js';
 const slider = new Slider('custom-carousel', {
     images: [
         "./slider/images/1.webp",
@@ -23,13 +23,13 @@ const slider = new Slider('custom-carousel', {
     slidesPerView: {
         mobile: 1,
         tablet: 1,
-        desktop: 1   },
+        desktop: 2   },
     
     //Features with Enable/Disable Options
 
     pagination: true,           // Enable/Disable pagination  
     navigation: true,           // Enable/Disable navigation buttons  
-    autoSlideInterval: 1300,    // Auto-slide speed (if enabled)  
+    autoSlideInterval: 800,    // Auto-slide speed (if enabled)  
     lazyLoad: true,             // Enable/Disable lazy loading of images  
     freeMode: true,             // Enable/Disable free drag mode  
     
@@ -47,7 +47,7 @@ const slider = new Slider('custom-carousel', {
     
     spaceBetween: 0,        //gap between images by pixel
     
-    // centeredView: true,        //center view img will activate - work in progress..
+    centeredView: true,        //center view img will activate - work in progress..
 
 });
 
