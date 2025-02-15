@@ -1,7 +1,7 @@
 // import Slider from '/slider/slider.js';
 // import Slider from '/slider/js/slider-1.0.2.js';
 
-import Slider from '/slider/js/slider-2.0.0.min.js';
+import Slider from '/slider/js/slider-2.0.0.js';
 
 // import Slider from '/slider/js/test.5.js';
 const slider = new Slider('custom-carousel', {
