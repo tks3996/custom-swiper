@@ -9,6 +9,7 @@ body {
 }
 .slider {
     width: 100%;
+    height: inherit;
     overflow: hidden;
     position: relative;
     border-radius: 10px;
@@ -16,6 +17,7 @@ body {
 .slides {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    height: inherit;
 }
 .slide {
     flex: 0 0 calc(100% / var(--slidesPerView));
