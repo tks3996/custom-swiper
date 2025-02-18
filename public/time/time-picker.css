@@ -1,0 +1,26 @@
+/* time-picker.css */
+.time-picker {
+    position: absolute;
+    display: inline-block;
+    padding: 10px;
+    background: #eeeeee;
+    border-radius: 6px;
+}
+
+.time-picker__select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    text-align: center;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    padding: 6px 10px;
+    background: #ffffff;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+}
+
+.time-picker__format {
+    margin-top: 10px;
+}

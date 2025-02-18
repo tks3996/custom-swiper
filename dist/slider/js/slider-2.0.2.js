@@ -10,16 +10,11 @@ export default class Slider {
         this.navigation = options.navigation ?? true;
         this.autoSlide = options.autoSlide ?? false;
         this.loop = options.loop ?? true;
-
-
         this.shiftMouseWheelScroll = true;
         this.mouseWheelScroll = options.mouseWheelScroll ?? false;
-
         if (this.mouseWheelScroll) {
             this.shiftMouseWheelScroll = false;
         }
-
-
         this.autoSlideInterval = options.autoSlideInterval || 3000;
         this.lazyLoad = options.lazyLoad ?? true;
         this.transitionSpeed = options.transitionSpeed || 300;
@@ -31,19 +26,13 @@ export default class Slider {
         this.index = this.initialSlide;
         this.autoSlideTimer = null;
         this.currentSlidesPerView = this.getSlidesPerView();
-
         this.spaceBetween = options.spaceBetween || 0;
-
-
         this.touchStartX = 0;
         this.touchEndX = 0;
         this.touchThreshold = 50;
-
         this.width = options.width || "100%";
         this.height = options.height || "auto";
-
         this.applySliderStyles();
-
         this.init();
     }
     init() {
@@ -51,25 +40,20 @@ export default class Slider {
         this.centerActiveSlide();
         this.updateSlidesPerView();
         this.addEventListeners();
-
         window.addEventListener('resize', () => {
             this.updateSlidesPerView();
         });
-
-
         if (this.lazyLoad) this.initLazyLoad();
         if (this.autoSlide) this.startAutoSlide();
         this.updateNavigationButtons();
         this.updateProgressBar();
     }
-
     applySliderStyles() {
         if (this.container) {
             this.container.style.width = this.width;
             this.container.style.height = this.height;
         }
     }
-
     createSlider() {
         this.container.innerHTML = `
             <div class="slider">
@@ -80,64 +64,43 @@ export default class Slider {
             </div>
             ${this.showThumbnails ? `<div class="thumbnails-wrapper"><div class="thumbnails">${this.getThumbnails()}</div></div>` : ''}
         `;
-
-        // Element references
         this.slidesContainer = this.container.querySelector('.slides');
         this.progressBar = this.container.querySelector('.progress-bar');
         this.prevButton = this.container.querySelector('.prev');
         this.nextButton = this.container.querySelector('.next');
         this.paginationContainer = this.container.querySelector('.pagination');
         this.thumbnailsContainer = this.container.querySelector('.thumbnails');
-
-        // Create pagination dots if enabled
         if (this.pagination) this.createPaginationDots();
-
-        // Update pagination on load
         this.updatePagination();
-
-        // Move to initial slide (if configured)
         this.moveSlide(this.initialSlide || 0, true);
-
-        // Set up thumbnails if enabled
         if (this.showThumbnails) {
             this.addThumbnailListeners();
             this.updateActiveThumbnail();
         }
-
-        // Start auto-slide if enabled
         if (this.autoSlide) {
             this.startAutoSlide();
         }
-
-        // Remove existing event listeners to prevent duplicates
         if (this.prevButton) {
             this.prevButton.removeEventListener('click', this.handlePrevClick);
             this.prevButton.addEventListener('click', this.handlePrevClick = () => this.moveSlide(-1));
         }
-
         if (this.nextButton) {
             this.nextButton.removeEventListener('click', this.handleNextClick);
             this.nextButton.addEventListener('click', this.handleNextClick = () => this.moveSlide(1));
         }
     }
-
-
     getSlides() {
         let slides = this.images.map((img, i) =>
             `<div class="slide" style="margin-right: ${this.spaceBetween}px;">
                 <img src="${img}" alt="Slide ${i + 1}" class="slider-image">
             </div>`
         );
-
         if (this.cloneSlides) {
             slides = [...slides, ...slides, ...slides];
             this.index = this.initialSlide % this.images.length;
         }
-
         return slides.join('');
     }
-
-
     initLazyLoad() {
         const images = this.container.querySelectorAll('.slider-image');
         images.forEach(img => img.setAttribute('loading', 'lazy'));
@@ -165,21 +128,15 @@ export default class Slider {
     }
     updatePagination() {
         if (!this.pagination) return;
-
         this.paginationContainer.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
-
         let realIndex = this.index % this.images.length;
         if (realIndex < 0) realIndex += this.images.length;
-
         const activeDot = this.paginationContainer.querySelector(`.dot[data-index="${realIndex}"]`);
         if (activeDot) activeDot.classList.add('active');
     }
-
-
     startAutoSlide() {
         if (!this.autoSlide) return;
         this.stopAutoSlide();
-
         if (this.progressBarEnabled && this.progressBar) {
             const interval = this.autoSlideInterval;
             this.progressBar.style.transition = "none";
@@ -189,7 +146,6 @@ export default class Slider {
                 this.progressBar.style.width = "100%";
             }, 10);
         }
-
         this.autoSlideTimer = setInterval(() => {
             if (this.cloneSlides && this.loop) {
                 this.moveSlide(1);
@@ -200,14 +156,9 @@ export default class Slider {
             }
         }, this.autoSlideInterval);
     }
-
-
-
-
     stopAutoSlide() {
         clearInterval(this.autoSlideTimer);
     }
-
     // thumbnail view
     getThumbnails() {
         return this.images.map((img, i) =>
@@ -218,54 +169,43 @@ export default class Slider {
     }
     updateActiveThumbnail() {
         if (!this.showThumbnails) return;
-
         this.thumbnailsContainer.querySelectorAll('.thumbnail').forEach(thumb => {
             thumb.classList.remove('active');
             thumb.style.opacity = "0.5";
         });
-
-
         let realIndex = this.index % this.images.length;
         if (realIndex < 0) realIndex += this.images.length;
-
         const activeThumb = this.thumbnailsContainer.querySelector(`.thumbnail[data-index="${realIndex}"]`);
         if (activeThumb) {
             activeThumb.classList.add('active');
             activeThumb.style.opacity = "1";
         }
-
         this.scrollThumbnailsToActive();
     }
-
     // progress bar
     updateProgressBar() {
         if (this.progressBar) {
             let progress = ((this.index + 1) / this.images.length) * 100;
             this.progressBar.style.width = `${progress}%`;
-
             if (!this.cloneSlides && !this.loop && this.index === this.images.length - 1) {
                 this.progressBar.style.width = "100%";
                 clearInterval(this.autoSlideTimer);
             }
         }
     }
-
     moveSlide(step, instant = false) {
         const slideWidth = 100 / this.getSlidesPerView();
         const spacingPercentage = (this.spaceBetween / this.slidesContainer.offsetWidth) * 100;
         const totalSlideWidth = slideWidth + spacingPercentage;
-
         const totalSlides = this.images.length;
-        const totalClones = totalSlides; // Clone exact number of slides for seamless looping
-
+        const totalClones = totalSlides; 
         let newIndex = this.index + step;
-
-        // Adjust for seamless infinite scrolling
+        
         if (this.cloneSlides && this.loop) {
             if (newIndex >= totalSlides + totalClones) {
-                newIndex = newIndex - totalSlides; // Move to the cloned start instead of resetting
+                newIndex = newIndex - totalSlides; 
             } else if (newIndex < 0) {
-                newIndex = totalSlides + (newIndex % totalSlides); // Move to cloned end instead of resetting
+                newIndex = totalSlides + (newIndex % totalSlides); 
             }
         } else if (this.loop) {
             if (newIndex >= totalSlides) {
@@ -280,12 +220,9 @@ export default class Slider {
                 newIndex = totalSlides - 1;
             }
         }
-
         this.index = newIndex;
-
         this.slidesContainer.style.transition = instant ? 'none' : `transform ${this.transitionSpeed}ms ease-in-out`;
-
-        // Calculate translate position
+        
         let translateX;
         if (this.centeredView) {
             const visibleSlides = this.getSlidesPerView();
@@ -294,42 +231,26 @@ export default class Slider {
         } else {
             translateX = this.index * totalSlideWidth;
         }
-
         this.slidesContainer.style.transform = `translateX(-${translateX}%)`;
-
         // Update UI elements
         this.updatePagination();
         this.updateActiveThumbnail();
         this.updateNavigationButtons();
         this.updateProgressBar();
-
         if (this.autoSlide) {
             this.startAutoSlide();
         }
     }
-
-
-
-
     updateSpaceBetween(space) {
         this.spaceBetween = space;
-
         const slideWidth = 100 / this.getSlidesPerView();
         const spacingPercentage = (this.spaceBetween / this.slidesContainer.offsetWidth) * 100;
-
         this.slidesContainer.style.transform = `translateX(-${this.index * (slideWidth + spacingPercentage)}%)`;
-
         this.updatePagination();
         this.updateActiveThumbnail();
         this.updateNavigationButtons();
         this.updateProgressBar();
     }
-
-
-
-
-
-
     updateNavigationButtons() {
         if (this.cloneSlides && this.loop) {
             if (this.prevButton) this.prevButton.style.display = 'block';
@@ -343,9 +264,6 @@ export default class Slider {
             }
         }
     }
-
-
-
     scrollThumbnailsToActive() {
         if (!this.thumbnailsContainer) return;
         const wrapper = this.thumbnailsContainer.parentElement;
@@ -354,12 +272,9 @@ export default class Slider {
         const totalThumbnails = thumbnails.length;
         if (totalThumbnails === 0) return;
         const thumbWidth = thumbnails[0].clientWidth + 10;
-
         let realIndex = this.index % this.images.length;
         if (realIndex < 0) realIndex += this.images.length;
-
         const totalThumbnailsWidth = totalThumbnails * thumbWidth;
-
         if (totalThumbnailsWidth <= wrapperWidth) {
             this.thumbnailsContainer.style.justifyContent = "center";
             this.thumbnailsContainer.style.display = "flex";
@@ -368,13 +283,10 @@ export default class Slider {
             this.thumbnailsContainer.style.justifyContent = "flex-start";
             this.thumbnailsContainer.style.display = "flex";
             this.thumbnailsContainer.style.scrollBehavior = "smooth";
-
             const activeThumb = this.thumbnailsContainer.querySelector(`.thumbnail[data-index="${realIndex}"]`);
             if (!activeThumb) return;
-
             const activeIndex = thumbnails.indexOf(activeThumb);
             const visibleCount = Math.floor(wrapperWidth / thumbWidth);
-
             if (activeIndex === 0) {
                 this.thumbnailsContainer.scrollTo({ left: 0, behavior: 'smooth' });
             } else if (activeIndex >= totalThumbnails - visibleCount) {
@@ -390,7 +302,6 @@ export default class Slider {
             }
         }
     }
-
     addThumbnailListeners() {
         this.thumbnailsContainer.querySelectorAll('.thumbnail').forEach(thumbnail => {
             thumbnail.addEventListener('click', (e) => {
@@ -399,47 +310,33 @@ export default class Slider {
             });
         });
     }
-
-
-
     // mouse event
-
     handleMouseScroll(e) {
         if (this.isScrolling) return;
-
         const isShiftActive = e.shiftKey && this.shiftMouseWheelScroll;
         const isNormalScroll = this.mouseWheelScroll && !e.shiftKey;
-
         if (isShiftActive || isNormalScroll) {
             const direction = e.deltaY > 0 ? 1 : -1;
-
             if (!this.cloneSlide) {
                 if ((this.index === 0 && direction === -1) ||
                     (this.index === this.images.length - 1 && direction === 1)) {
                     return;
                 }
             }
-
             this.isScrolling = true;
             this.moveSlide(direction);
-
             setTimeout(() => {
                 this.isScrolling = false;
             }, 300);
         }
     }
-
     handleTouchpadSwipe(e) {
-
         if (this.mouseWheelScroll) return;
-
-        console.log('hello');
+        console.log('swiped...');
         if (Math.abs(e.deltaX) > 50 && !this.isSwiping) {
             e.preventDefault();
             this.isSwiping = true;
-
             const direction = e.deltaX > 0 ? 1 : -1;
-
             if (!this.cloneSlide) {
                 if ((this.index === 0 && direction === -1) ||
                     (this.index === this.images.length - 1 && direction === 1)) {
@@ -447,62 +344,48 @@ export default class Slider {
                     return;
                 }
             }
-
             this.moveSlide(direction);
-
             setTimeout(() => {
                 this.isSwiping = false;
             }, 300);
         }
     }
     addEventListeners() {
-        if (this.navigation) {
-            this.prevButton.addEventListener('click', () => this.moveSlide(-1));
-            this.nextButton.addEventListener('click', () => this.moveSlide(1));
-        }
+        // if (this.navigation) {
+        //     this.prevButton.addEventListener('click', () => this.moveSlide(-1));
+        //     this.nextButton.addEventListener('click', () => this.moveSlide(1));
+        // }
         this.container.addEventListener('mouseenter', () => this.stopAutoSlide());
         this.container.addEventListener('mouseleave', () => this.startAutoSlide());
         document.addEventListener('keydown', (e) => {
             if (['ArrowLeft', 'ArrowRight'].includes(e.key)) {
                 e.preventDefault();
-
                 if (!this.cloneSlide) {
-
                     if (e.key === 'ArrowLeft' && this.index === 0) return;
                     if (e.key === 'ArrowRight' && this.index === this.images.length - 1) return;
                 }
-
                 if (e.key === 'ArrowLeft') this.moveSlide(-1);
                 if (e.key === 'ArrowRight') this.moveSlide(1);
             }
         });
-
         this.container.addEventListener('wheel', (e) => this.handleMouseScroll(e));
         this.container.addEventListener('wheel', (e) => this.handleTouchpadSwipe(e));
-
-        // Touch event listeners for mobile swiping
         this.container.addEventListener('touchstart', (e) => this.handleTouchStart(e));
         this.container.addEventListener('touchmove', (e) => this.handleTouchMove(e));
         this.container.addEventListener('touchend', () => this.handleTouchEnd());
-
-
         this.container.addEventListener('contextmenu', (e) => {
             if (!this.cloneSlides && !this.loop && this.index === this.images.length - 1) {
                 e.preventDefault();
             }
         });
-
         this.updateNavigationButtons();
     }
-
     handleTouchStart(e) {
         this.touchStartX = e.touches[0].clientX;
     }
-
     handleTouchMove(e) {
         this.touchEndX = e.touches[0].clientX;
     }
-
     handleTouchEnd() {
         const swipeDistance = this.touchStartX - this.touchEndX;
         if (Math.abs(swipeDistance) > this.touchThreshold) {
@@ -513,12 +396,10 @@ export default class Slider {
             }
         }
     }
-
     centerActiveSlide() {
         if (!this.centeredView) return;
         const slides = this.container.querySelectorAll('.slide');
         slides.forEach(slide => slide.classList.remove('active'));
-
         const activeSlide = slides[this.index];
         if (activeSlide) {
             activeSlide.classList.add('active');

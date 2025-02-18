@@ -35,25 +35,23 @@ const slider = new Slider('custom-carousel', {
     navigation: true,           // Enable/Disable navigation buttons  
     autoSlideInterval: 2000,    // Auto-slide speed (if enabled)  
     lazyLoad: true,             // Enable/Disable lazy loading of images  
-    freeMode: true,             // Enable/Disable free drag mode  
 
     transitionSpeed: 700,       // Transition speed for slides  
-    accessibility: true,        // Enable/Disable accessibility features 
     initialSlide: 0,            //initial slide image
     showThumbnails: true,      //thumbanil view for slides
     progressBar: true,         //progressbar
 
     autoSlide: true,          // Enable/Disable auto-slide  
-    loop: true,
-
+    
     cloneSlides: true,                // Enable clone whle slide for seemless slide
     mouseWheelScroll: false,        //if enable vertical mouse scroll will work
-
+    
     spaceBetween: 0,        //gap between images by pixel
-
+    
     centeredView: true,        //center view img will activate - work in progress..
-
-
+    
+    
+    loop: true,
     width: "100%",  //set the slider width
     height: "auto",  //set the height
 

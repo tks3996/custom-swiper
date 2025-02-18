@@ -10,3 +10,7 @@ Route::get('/', function () {
 Route::get('/g', function () {
     return view('gsap.index');
 });
+
+Route::get('/t', function () {
+    return view('time.index');
+});
