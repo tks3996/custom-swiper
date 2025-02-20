@@ -22,17 +22,17 @@
         <div class="features-list-container">
         <div class="col">
             <div class="feature-item">
-                <span>Slides Per View (Mobile)</span>
+                <span>Slides Per View <span style="color: red;">(Mobile)</span></span>
                 <input type="number" id="slidesPerViewMobile" class="number-input" value="1" min="1">
             </div>
 
             <div class="feature-item">
-                <span>Slides Per View (Tablet)</span>
+                <span>Slides Per View <span style="color: red;">(Tablet)</span></span>
                 <input type="number" id="slidesPerViewTablet" class="number-input" value="1" min="1">
             </div>
 
             <div class="feature-item">
-                <span>Slides Per View (Desktop)</span>
+                <span>Slides Per View <span style="color: red;">(Desktop)</span></span>
                 <input type="number" id="slidesPerViewDesktop" class="number-input" value="2" min="1">
             </div>
 
@@ -53,7 +53,7 @@
             </div>
 
             <div class="feature-item">
-                <span>Auto Slide Interval (ms)</span>
+                <span>Auto Slide Interval <span style="color: red;">(ms)</span></span>
                 <input type="number" id="autoSlideInterval" class="number-input" value="2000">
             </div>
 
@@ -66,7 +66,7 @@
             </div>
 
             <div class="feature-item">
-                <span>Transition Speed (ms)</span>
+                <span>Transition Speed <span style="color: red;">(ms)</span></span>
                 <input type="number" id="transitionSpeed" class="number-input" value="700">
             </div>
 
@@ -118,7 +118,7 @@
             </div>
 
             <div class="feature-item">
-                <span>Slide Spacing (px)</span>
+                <span>Slide Spacing <span style="color: red;">(px)</span></span>
                 <input type="number" id="spaceBetween" class="number-input" value="0">
             </div>
             <div class="feature-item">
@@ -129,12 +129,12 @@
                 </label>
             </div>
             <div class="feature-item">
-                <span>slide-bar Width (css value)</span>
+                <span>slide-bar Width <span style="color: red;">(css value)</span></span>
                 <input type="text" id="width" class="number-input" value="100%">
             </div>
 
             <div class="feature-item">
-                <span>slide-bar Height (css value)</span>
+                <span>slide-bar Height <span style="color: red;">(css value)</span></span>
                 <input type="text" id="height" class="number-input" value="auto">
             </div>
         </div>
