@@ -3,7 +3,7 @@
 export default class Slider {
     constructor(containerId, options) {
         this.container = document.getElementById(containerId);
-        this.images = options.images || [];
+        this.images = options.media || [];
         this.slidesPerView = options.slidesPerView || { mobile: 1, tablet: 1, desktop: 1 };
         this.progressBarEnabled = options.progressBar ?? false;
         this.pagination = options.pagination ?? true;

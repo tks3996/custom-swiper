@@ -151,7 +151,6 @@ img {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* Show buttons only when necessary */
 .thumbnail-wrapper.show-nav .thumb-prev,
 .thumbnail-wrapper.show-nav .thumb-next {
     display: block;
@@ -165,11 +164,80 @@ img {
     left: 0;
     width: 0%;
     height: 5px;
-    background: #0025756e; /* Progress bar color */
+    background: #0025756e; 
     transition: width linear;
 }
 .slider-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures images maintain aspect ratio */
+    object-fit: cover; 
+}
+iframe, video {
+    width: 100%;
+    height: inherit;
+    object-fit: cover;
+}
+
+/* features list */
+.features-list {
+    max-width: 600px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 100px;
+}
+.features-list h2 {
+    text-align: center;
+}
+.feature-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slide-bar {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+.slide-bar:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+input:checked + .slide-bar {
+    background-color: #4CAF50;
+}
+input:checked + .slide-bar:before {
+    transform: translateX(20px);
+}
+.number-input {
+    width: 50px;
+    text-align: center;
 }

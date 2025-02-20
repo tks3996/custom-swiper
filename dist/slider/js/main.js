@@ -1,61 +1,72 @@
-/*** 
- 
- * This slider has been implemented as a component using a constructor.  
- * For the full code, refer to 👇
- 
-   path: /slider/js/slider-2.0.2.js.
+import Slider from '/slider/js/slider-2.0.3.js';
 
-*/
+document.addEventListener("DOMContentLoaded", function () {
+    let sliderInstance;
 
-import Slider from '/slider/js/slider-2.0.2.js';
-const slider = new Slider('custom-carousel', {
-    images: [
-        "./slider/images/1.webp",
-        "./slider/images/2.webp",
+    function getSettings() {
+        return {
+            media: [
+                "./slider/images/1.webp",
+                "./slider/images/2.webp",
+                "./slider/images/3.webp",
+                "./slider/images/4.webp",
+                "./slider/images/5.webp",
+                "./slider/images/6.webp",
+                "./slider/images/7.webp",
+                "./slider/images/8.webp",
+                "./slider/images/6.webp",
+                "./slider/images/7.webp",
+                "./slider/images/8.webp",
+                "./slider/images/8.webp",
+                "./slider/images/6.webp",
+                "./slider/images/7.webp",
+                "./slider/images/8.webp",
+            ],
+            slidesPerView: {
+                mobile: 1,
+                tablet: 1,
+                desktop: 1
+            },
+            pagination: document.getElementById("pagination").checked,
+            navigation: document.getElementById("navigation").checked,
+            autoSlide: document.getElementById("autoSlideInterval").value > 0,
+            autoSlideInterval: parseInt(document.getElementById("autoSlideInterval").value) || 2000,
+            lazyLoad: document.getElementById("lazyLoad").checked,
+            transitionSpeed: parseInt(document.getElementById("transitionSpeed").value) || 700,
+            initialSlide: parseInt(document.getElementById("initialSlide").value) || 0,
+            showThumbnails: document.getElementById("showThumbnails").checked,
+            progressBar: document.getElementById("progressBar").checked,
+            loop: document.getElementById("loop").checked,
+            cloneSlides: document.getElementById("cloneSlides").checked,
+            mouseWheelScroll: document.getElementById("mouseWheelScroll").checked,
+            spaceBetween: parseInt(document.getElementById("spaceBetween").value) || 0,
+            centeredView: true, // Work in progress, kept as true
+            width: document.getElementById("width").value || "100%",
+            height: document.getElementById("height").value || "150px",
+        };
+    }
 
-        "./slider/images/3.webp",
-        "./slider/images/4.webp",
-        "./slider/images/5.webp",
-        "./slider/images/6.webp",
-        "./slider/images/7.webp",
-        "./slider/images/8.webp",
-        "./slider/images/6.webp",
-        "./slider/images/7.webp",
-        "./slider/images/8.webp",
-    ],
-    slidesPerView: {
-        mobile: 1,
-        tablet: 1,
-        desktop: 2
-    },
+    function initializeSlider() {
+        if (sliderInstance) {
+            document.getElementById("custom-carousel").innerHTML = ""; 
+        }
+        sliderInstance = new Slider('custom-carousel', getSettings());
+    }
 
-    //Features with Enable/Disable Options
+    function saveSettings() {
+        console.log("Applying new settings...");
+        console.log("Updated Slider Settings:", getSettings());
 
-    pagination: true,           // Enable/Disable pagination  
-    navigation: true,           // Enable/Disable navigation buttons  
-    autoSlideInterval: 2000,    // Auto-slide speed (if enabled)  
-    lazyLoad: true,             // Enable/Disable lazy loading of images  
+        console.log("Settings saved! The slider has been updated.");
 
-    transitionSpeed: 700,       // Transition speed for slides  
-    initialSlide: 0,            //initial slide image
-    showThumbnails: true,      //thumbanil view for slides
-    progressBar: true,         //progressbar
+        initializeSlider();
+    }
 
-    autoSlide: true,          // Enable/Disable auto-slide  
-    
-    cloneSlides: true,                // Enable clone whle slide for seemless slide
-    mouseWheelScroll: false,        //if enable vertical mouse scroll will work
-    
-    spaceBetween: 0,        //gap between images by pixel
-    
-    centeredView: true,        //center view img will activate - work in progress..
-    
-    
-    loop: true,
-    width: "100%",  //set the slider width
-    height: "auto",  //set the height
+    initializeSlider();
 
+    document.querySelectorAll("input, select").forEach(input => {
+        input.addEventListener("change", saveSettings);
+    });
 
+    window.saveSettings = saveSettings;
 });
-
-
