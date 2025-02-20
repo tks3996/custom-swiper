@@ -129,12 +129,12 @@
                 </label>
             </div>
             <div class="feature-item">
-                <span>slide-bar Width</span>
+                <span>slide-bar Width (css value)</span>
                 <input type="text" id="width" class="number-input" value="100%">
             </div>
 
             <div class="feature-item">
-                <span>slide-bar Height</span>
+                <span>slide-bar Height (css value)</span>
                 <input type="text" id="height" class="number-input" value="auto">
             </div>
         </div>
