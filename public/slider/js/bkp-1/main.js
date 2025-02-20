@@ -58,7 +58,7 @@ const slider = new Slider('custom-carousel', {
     
     loop: true,
     width: "100%",  //set the slider width
-    height: "150px",  //set the height
+    height: "inherit",  //set the height
 
 
 });

@@ -12,15 +12,25 @@
 
 </head>
 <body>
-    <div id="custom-carousel"></div>
-
-    
-    
-    
-    
+    <div id="custom-carousel"></div>  
     
     <div class="features-list" >
         <h2>slide Features Control</h2>
+        
+        <div class="feature-item">
+            <span>Slides Per View (Mobile)</span>
+            <input type="number" id="slidesPerViewMobile" class="number-input" value="1" min="1">
+        </div>
+        
+        <div class="feature-item">
+            <span>Slides Per View (Tablet)</span>
+            <input type="number" id="slidesPerViewTablet" class="number-input" value="1" min="1">
+        </div>
+        
+        <div class="feature-item">
+            <span>Slides Per View (Desktop)</span>
+            <input type="number" id="slidesPerViewDesktop" class="number-input" value="2" min="1">
+        </div>
         
         <div class="feature-item">
             <span>Pagination</span>
@@ -58,7 +68,7 @@
         
         <div class="feature-item">
             <span>Initial Slide</span>
-            <input type="number" id="initialSlide" class="number-input" value="5">
+            <input type="number" id="initialSlide" class="number-input" value="0">
         </div>
         
         <div class="feature-item">
@@ -105,7 +115,13 @@
             <span>Slide Spacing (px)</span>
             <input type="number" id="spaceBetween" class="number-input" value="0">
         </div>
-        
+        <div class="feature-item">
+            <span>Center View</span>
+            <label class="switch">
+                <input type="checkbox" id="centeredView">
+                <span class="slide-bar"></span>
+            </label>
+        </div>
         <div class="feature-item">
             <span>slide-bar Width</span>
             <input type="text" id="width" class="number-input" value="100%">
@@ -113,35 +129,12 @@
         
         <div class="feature-item">
             <span>slide-bar Height</span>
-            <input type="text" id="height" class="number-input" value="150px">
+            <input type="text" id="height" class="number-input" value="auto">
         </div>
     
         <button onclick="saveSettings()">Save Settings</button>
     </div>
     <script type="module" src="{{asset('slider/js/main.js')}}"></script>
     
-    <script>
-        // function saveSettings() {
-            //     const settings = {
-                //         pagination: document.getElementById("pagination").checked,
-                //         navigation: document.getElementById("navigation").checked,
-                //         autoSlideInterval: parseInt(document.getElementById("autoSlideInterval").value),
-        //         lazyLoad: document.getElementById("lazyLoad").checked,
-        //         transitionSpeed: parseInt(document.getElementById("transitionSpeed").value),
-        //         initialSlide: parseInt(document.getElementById("initialSlide").value),
-        //         showThumbnails: document.getElementById("showThumbnails").checked,
-        //         progressBar: document.getElementById("progressBar").checked,
-        //         loop: document.getElementById("loop").checked,
-        //         cloneSlides: document.getElementById("cloneSlides").checked,
-        //         mouseWheelScroll: document.getElementById("mouseWheelScroll").checked,
-        //         spaceBetween: parseInt(document.getElementById("spaceBetween").value),
-        //         width: document.getElementById("width").value,
-        //         height: document.getElementById("height").value,
-        //     };
-    
-        //     console.log("Updated Slider Settings:", settings);
-        //     alert("Settings saved! Check the console for updated values.");
-        // }
-    </script>
 </body>
 </html>

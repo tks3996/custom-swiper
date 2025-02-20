@@ -14,18 +14,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 "./slider/images/6.webp",
                 "./slider/images/7.webp",
                 "./slider/images/8.webp",
-                "./slider/images/6.webp",
-                "./slider/images/7.webp",
-                "./slider/images/8.webp",
-                "./slider/images/8.webp",
-                "./slider/images/6.webp",
-                "./slider/images/7.webp",
-                "./slider/images/8.webp",
             ],
             slidesPerView: {
-                mobile: 1,
-                tablet: 1,
-                desktop: 1
+                mobile: parseInt(document.getElementById("slidesPerViewMobile").value) || 1,
+                tablet: parseInt(document.getElementById("slidesPerViewTablet").value) || 1,
+                desktop: parseInt(document.getElementById("slidesPerViewDesktop").value) || 2,
             },
             pagination: document.getElementById("pagination").checked,
             navigation: document.getElementById("navigation").checked,
@@ -40,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
             cloneSlides: document.getElementById("cloneSlides").checked,
             mouseWheelScroll: document.getElementById("mouseWheelScroll").checked,
             spaceBetween: parseInt(document.getElementById("spaceBetween").value) || 0,
-            centeredView: true, // Work in progress, kept as true
+            centeredView: document.getElementById("centeredView").checked,
             width: document.getElementById("width").value || "100%",
             height: document.getElementById("height").value || "150px",
         };
@@ -48,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function initializeSlider() {
         if (sliderInstance) {
-            document.getElementById("custom-carousel").innerHTML = ""; 
+            document.getElementById("custom-carousel").innerHTML = ""; // Clear existing slides
         }
         sliderInstance = new Slider('custom-carousel', getSettings());
     }
