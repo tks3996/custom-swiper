@@ -73,7 +73,7 @@ export default class Slider {
         this.thumbnailsContainer = this.container.querySelector('.thumbnails');
         if (this.pagination) this.createPaginationDots();
         this.updatePagination();
-        this.moveSlide(this.initialSlide || 0, true);
+        // this.moveSlide(this.initialSlide || 0, true);
         if (this.showThumbnails) {
             this.addThumbnailListeners();
             this.updateActiveThumbnail();
@@ -103,11 +103,11 @@ export default class Slider {
                                     class="slider-video">
                             </iframe>
                         </div>`;
-            } else if (media.match(/\.(jpeg|jpg|gif|png|webp)$/i)) { // Check if it's an image (jpg, jpeg, png, gif)
+            } else if (media.match(/\.(jpeg|jpg|gif|png|webp)$/i)) { 
                 return `<div class="slide" style="margin-right: ${this.spaceBetween}px;">
                             <img class="slider-image" src="${media}" alt="Slide Image ${i + 1}" />
                         </div>`;
-            } else if (media.match(/\.(mp4|webm|ogg)$/i)) { // Check if it's a local video file (mp4, webm, ogg)
+            } else if (media.match(/\.(mp4|webm|ogg)$/i)) {
                 return `<div class="slide" style="margin-right: ${this.spaceBetween}px;">
                             <video class="slider-video" autoplay muted loop>
                                 <source src="${media}" type="video/mp4">
