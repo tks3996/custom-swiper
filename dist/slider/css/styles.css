@@ -182,7 +182,7 @@ iframe, video {
 .features-list {
     max-width: 600px;
     background: #f9f9f9;
-    padding: 20px;
+    padding: 20px 20px 30px 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -190,6 +190,7 @@ iframe, video {
 }
 .features-list h2 {
     text-align: center;
+    margin-bottom: 20px;
 }
 .feature-item {
     display: flex;
@@ -240,4 +241,18 @@ input:checked + .slide-bar:before {
 .number-input {
     width: 50px;
     text-align: center;
+}
+.features-list-container{
+    display: flex;
+    gap: 50px;
+}
+.features-list-container .col{
+    max-width: 300px;
+    flex: 1;
+}
+.features-list button {
+    text-align: right;
+    right: 0;
+    position: absolute;
+    padding: 5px;
 }
