@@ -180,7 +180,7 @@ iframe, video {
 
 /* features list */
 .features-list {
-    max-width: 600px;
+    width: 600px;
     background: #f9f9f9;
     padding: 20px 20px 30px 20px;
     border-radius: 8px;

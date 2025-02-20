@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let sliderInstance;
 
     function getSettings() {
-        return {
+        const savedSettings = JSON.parse(localStorage.getItem("sliderSettings"));
+        return savedSettings || {
             media: [
                 "./slider/images/1.webp",
                 "./slider/images/2.webp",
@@ -15,6 +16,62 @@ document.addEventListener("DOMContentLoaded", function () {
                 "./slider/images/7.webp",
                 "./slider/images/8.webp",
             ],
+            slidesPerView: {
+                mobile: 1,
+                tablet: 1,
+                desktop: 2
+            },
+            pagination: true,
+            navigation: true,
+            autoSlide: true,
+            autoSlideInterval: 2000,
+            lazyLoad: true,
+            transitionSpeed: 700,
+            initialSlide: 0,
+            showThumbnails: true,
+            progressBar: true,
+            loop: true,
+            cloneSlides: true,
+            mouseWheelScroll: false,
+            spaceBetween: 0,
+            centeredView: true,
+            width: "100%",
+            height: "150px",
+        };
+    }
+
+    function applySettingsToUI(settings) {
+        document.getElementById("pagination").checked = settings.pagination;
+        document.getElementById("navigation").checked = settings.navigation;
+        document.getElementById("autoSlideInterval").value = settings.autoSlideInterval;
+        document.getElementById("lazyLoad").checked = settings.lazyLoad;
+        document.getElementById("transitionSpeed").value = settings.transitionSpeed;
+        document.getElementById("initialSlide").value = settings.initialSlide;
+        document.getElementById("showThumbnails").checked = settings.showThumbnails;
+        document.getElementById("progressBar").checked = settings.progressBar;
+        document.getElementById("loop").checked = settings.loop;
+        document.getElementById("cloneSlides").checked = settings.cloneSlides;
+        document.getElementById("mouseWheelScroll").checked = settings.mouseWheelScroll;
+        document.getElementById("spaceBetween").value = settings.spaceBetween;
+        document.getElementById("centeredView").checked = settings.centeredView;
+        document.getElementById("width").value = settings.width;
+        document.getElementById("height").value = settings.height;
+
+        document.getElementById("slidesPerViewMobile").value = settings.slidesPerView.mobile;
+        document.getElementById("slidesPerViewTablet").value = settings.slidesPerView.tablet;
+        document.getElementById("slidesPerViewDesktop").value = settings.slidesPerView.desktop;
+    }
+
+    function initializeSlider(settings) {
+        if (sliderInstance) {
+            document.getElementById("custom-carousel").innerHTML = ""; 
+        }
+        sliderInstance = new Slider('custom-carousel', settings);
+    }
+
+    function saveSettings() {
+        const settings = {
+            media: getSettings().media, 
             slidesPerView: {
                 mobile: parseInt(document.getElementById("slidesPerViewMobile").value) || 1,
                 tablet: parseInt(document.getElementById("slidesPerViewTablet").value) || 1,
@@ -37,25 +94,17 @@ document.addEventListener("DOMContentLoaded", function () {
             width: document.getElementById("width").value || "100%",
             height: document.getElementById("height").value || "150px",
         };
+
+        localStorage.setItem("sliderSettings", JSON.stringify(settings));
+
+        console.log("Settings saved:", settings);
+        console.log("Settings saved! They will persist after refresh.");
+
+        initializeSlider(settings);
     }
-
-    function initializeSlider() {
-        if (sliderInstance) {
-            document.getElementById("custom-carousel").innerHTML = ""; // Clear existing slides
-        }
-        sliderInstance = new Slider('custom-carousel', getSettings());
-    }
-
-    function saveSettings() {
-        console.log("Applying new settings...");
-        console.log("Updated Slider Settings:", getSettings());
-
-        console.log("Settings saved! The slider has been updated.");
-
-        initializeSlider();
-    }
-
-    initializeSlider();
+    const storedSettings = getSettings();
+    applySettingsToUI(storedSettings);
+    initializeSlider(storedSettings);
 
     document.querySelectorAll("input, select").forEach(input => {
         input.addEventListener("change", saveSettings);
