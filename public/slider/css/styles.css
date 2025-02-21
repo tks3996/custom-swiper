@@ -245,8 +245,8 @@ input:checked + .slide-bar:before {
     cursor: pointer;
 } */
 .pushable {
-    background: hsl(340deg 100% 32%);
-    border-radius: 12px;
+    background: hsl(340deg 100% 30%);
+    border-radius: 6px;
     margin-block: 12px 0px;
     font-weight: 600;
     border: none;
@@ -257,7 +257,7 @@ input:checked + .slide-bar:before {
   .front {
     display: block;
     padding: 8px 15px;
-    border-radius: 12px;
+    border-radius: 6px;
     font-size: 1rem;
     background: hsl(345deg 100% 47%);
     color: white;

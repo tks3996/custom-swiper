@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("sliderSettings", JSON.stringify(settings));
 
         console.log("Settings saved:", settings);
-        console.log("Settings saved! They will persist after refresh.");
+        // console.log("Settings saved! They will persist after refresh.");
 
         initializeSlider(settings);
     }
