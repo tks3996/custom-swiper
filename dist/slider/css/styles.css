@@ -119,21 +119,6 @@ img {
     opacity: 1;
 }
 
-/* Prevent shrinking on smaller screens */
-@media (max-width: 768px) {
-    .thumbnail {
-        width: 40px;
-        height: 40px;
-    }
-}
-
-@media (max-width: 480px) {
-    .thumbnail {
-        width: 35px;
-        height: 35px;
-    }
-}
-
 .thumb-prev,
 .thumb-next {
     background-color: rgba(0, 0, 0, 0.5);
@@ -180,16 +165,17 @@ iframe, video {
 
 /* features list */
 .features-list {
-    width: 600px;
+    max-width: 600px;
+    width: 100%;
     background: #f9f9f9;
-    padding: 20px 20px 30px 20px;
+    padding: 20px 20px 20px 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
     top: 100px;
 }
 .features-list h2 {
-    text-align: center;
+    /* text-align: center; */
     margin-bottom: 20px;
 }
 .feature-item {
@@ -250,9 +236,59 @@ input:checked + .slide-bar:before {
     max-width: 300px;
     flex: 1;
 }
-.features-list button {
-    text-align: right;
-    right: 0;
-    position: absolute;
-    padding: 5px;
+/* .features-list button {
+    position: relative;
+    padding: 10px 15px;
+    border: 1px solid #00000000;
+    box-shadow: -2px 2px 5px #077300a6 inset, -5px 5px 6px #19510fb5;
+    border-radius: 4px;
+    cursor: pointer;
+} */
+.pushable {
+    background: hsl(340deg 100% 32%);
+    border-radius: 12px;
+    margin-block: 12px 0px;
+    font-weight: 600;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+  }
+  .front {
+    display: block;
+    padding: 8px 15px;
+    border-radius: 12px;
+    font-size: 1rem;
+    background: hsl(345deg 100% 47%);
+    color: white;
+    transform: translateY(-6px);
+  }
+
+  .pushable:active .front {
+    transform: translateY(-2px);
+  }
+
+
+/* Prevent shrinking on smaller screens */
+@media (max-width: 1024px) {
+    .features-list {
+        max-width: 678px;
+        width: 100%;
+    }
+    .features-list-container{
+        gap: 20px;
+    }
+}
+@media (max-width: 768px) {
+    .thumbnail {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .thumbnail {
+        width: 35px;
+        height: 35px;
+    }
 }
